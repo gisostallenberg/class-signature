@@ -1,0 +1,21 @@
+{
+    "name": "gisostallenberg/class-signature",
+    "description": "Create a signature of a given PHP class",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Giso Stallenberg",
+            "email": "gisostallenberg@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "GisoStallenberg\\ClassSignature\\": "src/"
+        }
+    }
+}
