@@ -1,5 +1,5 @@
 <?php
-class Rabbit implements Chasable {
+class Rabbit extends Mamal implements Chasable {
 
     public function beingChased(Chaser $chaser)
     {

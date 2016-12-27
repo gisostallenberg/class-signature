@@ -6,9 +6,16 @@
             },
             "barked": {
                 "access": "protected"
+            },
+            "amountOfLegs": {
+                "access": "protected"
             }
         },
         "methods": {
+            "getAmountOfLegs": {
+                "access": "public",
+                "parameters": []
+            },
             "chase": {
                 "access": "public",
                 "parameters": {

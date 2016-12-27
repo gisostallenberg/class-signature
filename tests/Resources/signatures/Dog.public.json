@@ -6,6 +6,10 @@
             }
         },
         "methods": {
+            "getAmountOfLegs": {
+                "access": "public",
+                "parameters": []
+            },
             "chase": {
                 "access": "public",
                 "parameters": {

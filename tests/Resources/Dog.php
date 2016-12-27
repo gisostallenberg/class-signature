@@ -1,5 +1,5 @@
 <?php
-class Dog implements Chaser {
+class Dog extends Mamal implements Chaser {
     private $lastBark;
 
     public $name;
