@@ -6,6 +6,16 @@
             }
         },
         "methods": {
+            "silenceAllDogs": {
+                "access": "public",
+                "static": true,
+                "parameters": {
+                    "doSilence": {
+                        "type": null,
+                        "default": true
+                    }
+                }
+            },
             "getAmountOfLegs": {
                 "access": "public",
                 "parameters": []

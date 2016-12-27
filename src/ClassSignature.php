@@ -96,9 +96,11 @@ class ClassSignature
             $propertyName = $reflectionProperty->getName();
             $access = $reflectionProperty->isPublic() ? 'public' : ($reflectionProperty->isProtected() ? 'protected' : 'unknown');
 
-            $result[$className]['properties'][$propertyName] = compact(
-                'access'
-            );
+            $information = compact('access');
+            if ($reflectionProperty->isStatic()) {
+                $information['static'] = true;
+            }
+            $result[$className]['properties'][$propertyName] = $information;
         }
 
 
@@ -136,10 +138,15 @@ class ClassSignature
                     'default' => $default,
                 ];
             }
-            $result[$className]['methods'][$reflectionMethod->getName()] = compact(
+
+            $information = compact(
                 'access',
                 'parameters'
             );
+            if ($reflectionMethod->isStatic()) {
+                $information['static'] = true;
+            }
+            $result[$className]['methods'][$reflectionMethod->getName()] = $information;
         }
 
         return json_encode($result, JSON_PRETTY_PRINT);

@@ -7,11 +7,25 @@
             "barked": {
                 "access": "protected"
             },
+            "allDogsAreSilenced": {
+                "access": "protected",
+                "static": true
+            },
             "amountOfLegs": {
                 "access": "protected"
             }
         },
         "methods": {
+            "silenceAllDogs": {
+                "access": "public",
+                "static": true,
+                "parameters": {
+                    "parameter1": {
+                        "type": null,
+                        "default": true
+                    }
+                }
+            },
             "getAmountOfLegs": {
                 "access": "public",
                 "parameters": []
