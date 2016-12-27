@@ -102,7 +102,7 @@ class ClassSignature
             }
             $result[$className]['properties'][$propertyName] = $information;
         }
-
+        uksort($result[$className]['properties'], 'strcasecmp');
 
         $filterMethods = ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PROTECTED;
         if ($this->onlyPublic) {
@@ -148,6 +148,7 @@ class ClassSignature
             }
             $result[$className]['methods'][$reflectionMethod->getName()] = $information;
         }
+        uksort($result[$className]['methods'], 'strcasecmp');
 
         return json_encode($result, JSON_PRETTY_PRINT);
     }
