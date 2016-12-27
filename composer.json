@@ -17,5 +17,13 @@
         "psr-4": {
             "GisoStallenberg\\ClassSignature\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/Resources/"
+        ],
+        "psr-4": {
+            "GisoStallenberg\\ClassSignature\\Tests\\": "tests/"
+        }
     }
 }

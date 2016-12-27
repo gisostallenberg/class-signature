@@ -1,0 +1,35 @@
+{
+    "Dog": {
+        "properties": {
+            "name": {
+                "access": "public"
+            }
+        },
+        "methods": {
+            "chase": {
+                "access": "public",
+                "parameters": {
+                    "chasable": {
+                        "type": "Chasable",
+                        "default": null
+                    }
+                }
+            },
+            "bark": {
+                "access": "public",
+                "parameters": {
+                    "possibleBarks": {
+                        "type": "array",
+                        "default": [
+                            "Bark!"
+                        ]
+                    },
+                    "amount": {
+                        "type": null,
+                        "default": 1
+                    }
+                }
+            }
+        }
+    }
+}
