@@ -29,6 +29,13 @@ class ClassSignature
     private $anonymiseParameters = false;
 
     /**
+     * Conversion to be done on methods and their parameters
+     *
+     * @var mixed
+     */
+    private $caseConversion = false;
+
+    /**
      * @param string $class
      */
     public function __construct($class)
@@ -50,6 +57,7 @@ class ClassSignature
      * Change the setting of onlyPublic
      *
      * @param boolean $onlyPublic
+     * @return ClassSignature
      */
     public function onlyPublic($onlyPublic = true)
     {
@@ -62,10 +70,24 @@ class ClassSignature
      * Change the setting of anonymiseParameters
      *
      * @param boolean $anonymiseParameters
+     * @return ClassSignature
      */
     public function anonymiseParameters($anonymiseParameters = true)
     {
         $this->anonymiseParameters = $anonymiseParameters;
+
+        return $this;
+    }
+
+    /**
+     * Convert te case of methods and method parameters, pass false to drop conversion
+     *
+     * @param mixed $conversion
+     * @return ClassSignature
+     */
+    public function convertCase($conversion = 'strtolower')
+    {
+        $this->caseConversion = $conversion;
 
         return $this;
     }
@@ -121,6 +143,10 @@ class ClassSignature
                     $parameterName = $reflectionParameter->getName();
                 }
 
+                if ($this->caseConversion !== false) {
+                    $parameterName = call_user_func($this->caseConversion, $parameterName);
+                }
+
                 $type = null;
                 if (($parameterClass = $reflectionParameter->getClass()) instanceof ReflectionClass) {
                     $type = $parameterClass->getName();
@@ -146,7 +172,13 @@ class ClassSignature
             if ($reflectionMethod->isStatic()) {
                 $information['static'] = true;
             }
-            $result[$className]['methods'][$reflectionMethod->getName()] = $information;
+
+            $methodName = $reflectionMethod->getName();
+            if ($this->caseConversion !== false) {
+                $methodName = call_user_func($this->caseConversion, $methodName);
+            }
+
+            $result[$className]['methods'][$methodName] = $information;
         }
         uksort($result[$className]['methods'], 'strcasecmp');
 

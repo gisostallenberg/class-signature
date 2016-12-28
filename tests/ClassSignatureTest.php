@@ -88,18 +88,39 @@ class ClassSignatureTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test an export
+     * Test to see if manipulating an object is not changing the signature
      */
     public function testCouplingObjectsHasNoInfluence()
     {
         $dog = new Dog();
+        $expectedSignature = ClassSignature::create($dog)
+            ->generate();
+
         $dog->chase(new Rabbit());
         $resultSignature = ClassSignature::create($dog)
             ->generate();
 
-        $this->assertJsonStringEqualsJsonFile(
-            __DIR__ . '/Resources/signatures/Dog.protected.json',
+        $this->assertJsonStringEqualsJsonString(
+            $expectedSignature,
             $resultSignature
         );
+    }
+
+    /**
+     * Test case conversion
+     */
+    public function testConversionOfCase()
+    {
+        $resultSignature = ClassSignature::create('Dog')
+            ->convertCase()
+            ->generate();
+
+        $results = json_decode($resultSignature, true);
+
+        $this->assertFalse(array_key_exists('silenceAllDogs', $results['Dog']['methods']));
+        $this->assertTrue(array_key_exists('silencealldogs', $results['Dog']['methods']));
+
+        $this->assertFalse(array_key_exists('doSilence', $results['Dog']['methods']['silencealldogs']['parameters']));
+        $this->assertTrue(array_key_exists('dosilence', $results['Dog']['methods']['silencealldogs']['parameters']));
     }
 }
